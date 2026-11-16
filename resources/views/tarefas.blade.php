@@ -8,16 +8,27 @@
 
     <h1>Nova Tarefa</h1>
 
+    @if ($errors->any())
+        <div role="alert">
+            <p><strong>Corrija os erros abaixo:</strong></p>
+            <ul>
+                @foreach ($errors->all() as $erro)
+                    <li>{{ $erro }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <!-- FORMULÁRIO DE CADASTRO (POST) -->
     <form action="{{ route('tarefas.store') }}" method="POST">
         <!-- Token obrigatório do Laravel para proteção contra ataques CSRF -->
         @csrf
 
         <label for="titulo">Título:</label><br>
-        <input type="text" id="titulo" name="titulo" required><br><br>
+        <input type="text" id="titulo" name="titulo" maxlength="255" value="{{ old('titulo') }}" required><br><br>
 
         <label for="descricao">Descrição:</label><br>
-        <input type="text" id="descricao" name="descricao" required><br><br>
+        <input type="text" id="descricao" name="descricao" maxlength="255" value="{{ old('descricao') }}" required><br><br>
 
         <button type="submit">Cadastrar</button>
     </form>
@@ -37,7 +48,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($tarefas as $tarefa)
+            @forelse($tarefas as $tarefa)
                 <tr>
                     <td>{{ $tarefa->id }}</td>
                     <td>{{ $tarefa->titulo }}</td>
@@ -52,7 +63,11 @@
                         </form>
                     </td>
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="4">Nenhuma tarefa cadastrada.</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 

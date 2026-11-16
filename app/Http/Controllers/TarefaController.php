@@ -14,10 +14,20 @@ class TarefaController extends Controller
         return view('tarefas', compact('tarefas')); // Retorna a view "tarefas.blade.php"
     }
 
-    // 2. CADASTRAR: Recebe os dados do formulário e salva no banco
+    // 2. CADASTRAR: Recebe os dados do formulário, valida e salva no banco
     public function store(Request $request)
     {
-        Tarefa::create($request->only('titulo', 'descricao')); // INSERT INTO tarefas
+        $dados = $request->validate([
+            'titulo' => ['required', 'string', 'max:255'],
+            'descricao' => ['required', 'string', 'max:255'],
+        ], [
+            'titulo.required' => 'O título é obrigatório.',
+            'titulo.max' => 'O título deve ter no máximo 255 caracteres.',
+            'descricao.required' => 'A descrição é obrigatória.',
+            'descricao.max' => 'A descrição deve ter no máximo 255 caracteres.',
+        ]);
+
+        Tarefa::create($dados); // INSERT INTO tarefas
         return redirect()->route('tarefas.index'); // Redireciona de volta para a lista
     }
 
