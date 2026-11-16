@@ -1,6 +1,13 @@
 # Lista de Tarefas (Laravel + MySQL)
 
-Sistema web extremamente simples e didático desenvolvido para trabalho acadêmico.
+Sistema web extremamente simples e didático desenvolvido para a avaliação final **P2** da disciplina de **Desenvolvimento Full Stack** (Fatec Pompeia — Shunji Nishimura).
+
+**Autores:** Lucas Tetuya Hiratuca e Paulo Henrique Domingues Antunes  
+**Professor:** Leonardo Carrilho
+
+📄 **Relatório Completo em PDF:** [docs/Trabalho_Final_Lista_de_Tarefas_ABNT.pdf](docs/Trabalho_Final_Lista_de_Tarefas_ABNT.pdf)
+
+---
 
 ## 🛠️ Stack Utilizada
 - **Backend / Frontend**: Laravel 11 com Blade
@@ -10,8 +17,8 @@ Sistema web extremamente simples e didático desenvolvido para trabalho acadêmi
 ## 📋 Entidade e Banco de Dados
 Tabela: `tarefas`
 - `id`: Chave primária (auto-incremento)
-- `titulo`: Texto (string)
-- `descricao`: Texto (string)
+- `titulo`: Texto curto obrigatório (`varchar(255)`)
+- `descricao`: Texto obrigatório (`varchar(255)`)
 - `created_at` / `updated_at`: Timestamps
 
 ## 🚀 Como Executar o Projeto
